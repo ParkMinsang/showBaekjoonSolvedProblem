@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>백준 푼 문제 조회</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" ></script>
+<script>
+	function callJqueryAjax(){
+		var id = $('#id').val();
+		$.ajax({
+			url : 'AjaxHandler',
+			method : 'GET',
+			data : {id : id},
+			success : function(resultText){
+				$('#result').html(resultText).css("border","1px solid grey");
+				$('#result > a').each(function(){
+					$(this).attr("href","https://www.acmicpc.net/problem/"+$(this).text());
+				}).attr("target","_blank").css("text-decoration","none").css("color","green");
+			},
+			error : function(jqXHR, exception){
+				console.log('Error occured!!');
+			}
+		});
+	}
+</script>
+<style>
+	*{
+		margin:0; padding:0;
+	}
+	
+	header{
+		width:960px;
+		margin:5px auto;
+	}
+	
+	header > h2{
+		color:skyblue;
+	}
+	
+	section{
+		width:960px;
+		margin:0 auto;
+	}
+</style>
+</head>
+<body>
+<header>
+	<h2>백준 푼 문제 조회</h2>
+	Enter your id:
+	<input type="text" id="id"/><button onclick="callJqueryAjax()">검색</button>
+</header>
+<br/><br/>
+<section>
+	<div id="result"></div>
+</section>
+</body>
+</html>
